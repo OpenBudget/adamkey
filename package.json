@@ -7,6 +7,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server",
+    "build-app": "webpack",
     "watch": "tsc -p src -w",
     "build:styles": "lessc --clean-css --source-map ./assets/styles/adamkey.less ./assets/styles/adamkey.css",
     "build:scripts": "tsc -p src",
@@ -41,7 +42,8 @@
     "style-loader": "^0.19.0",
     "typescript": "^2.4.2",
     "uglify-js-plugin": "0.0.6",
-    "webpack": "^3.6.0",
+    "webpack": "^3.11.0",
+    "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {

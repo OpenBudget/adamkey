@@ -11,7 +11,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
           <div class='row detail' 
               *ngFor='let value of data.values; let i = index'
               [ngClass]="{hovered: i == hoverIndex && hoverIndex != data.selected, selected: i == data.selected}"
-              (mouseover)="hoverIndex = i"
+              (mouseover)="hoverIndex = i; scrollBars()"
           >
             <div class='index-col col-xs-1'>
               <div class='text'>{{ i + 1 }}</div>
@@ -25,7 +25,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
           </div>
         </div>
       </div>
-      <div class='barchart col-md-6'
+      <div class='barchart col-md-6' #bars
         [style.height]="maxHeight + 'px'"
         >
         <ng-container  *ngFor="let v of data.values; let i = index">
@@ -61,9 +61,12 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         padding: 0px 20px;
       }
 
+      .details, .barchart {
+        scroll-behavior: smooth;
+      }
+
       .details {
         overflow-y: scroll;
-        scroll-behavior: smooth;
         border: 1px solid #EEEEEE;	
         border-radius: 4px;	
         background-color: #FFFFFF;
@@ -76,7 +79,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
       }
 
       .detail.hovered {
-        background-color: #EAF9DE;
+        background-color: #E9E6F1;
       }
 
       .index-col {
@@ -85,13 +88,6 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         font-family: "Abraham TRIAL";	
         font-size: 18px;	
         text-align: right;
-      }
-
-      ::ng-deep .label-col a {
-        color: #7FAA5E;	
-        font-family: "Abraham TRIAL";	
-        font-size: 14px;
-        text-align: right; 
       }
 
       .amount-col {
@@ -103,7 +99,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
       }
 
       .detail.selected {
-        background-color: #6A9548;
+        background-color: #FE8255;
       }
 
       .detail.selected .text, ::ng-deep .detail.selected .text a {
@@ -114,20 +110,21 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         position: relative;
         border-right: 1px solid #888;
         padding-right: 0;
+        overflow-y: scroll;
       }   
 
       .bar {
         position: absolute;
         height: 8px;
-        background-color: #EAF9DE;
+        background-color: #E9E6F1;
       }
 
       .bar.hovered {
-        background-color: #C5F6A2;
+        background-color: #5A32D1;
       }
 
       .bar.selected {
-        background-color: #6A9548;
+        background-color: #FE8255;
       }
       
       .bar-bg {
@@ -152,10 +149,14 @@ export class AdamKeyChartComponent {
 
   @Input() public data: any;
   @ViewChild('details', { read: ElementRef }) public details: ElementRef;
+  @ViewChild('bars', { read: ElementRef }) public bars: ElementRef;
 
   maxValue: number = 1;
   maxHeight: number = 1;
   hoverIndex_: number = 0;
+
+  BAR_HEIGHT = 9;
+  DETAILS_HEIGHT = 50;
 
   constructor() {
   }
@@ -170,9 +171,22 @@ export class AdamKeyChartComponent {
   }
 
   scrollDetails() {
-    this.details.nativeElement.scrollTop = // height of detail - height of bar
-      10 + this.hoverIndex * (50*(1 + 1/this.data.values.length) - 9); 
-    console.log('st', this.details.nativeElement.scrollTop);
+    let relOffset = this.bars.nativeElement.querySelectorAll('.bar')[this.hoverIndex].offsetTop -
+                    this.bars.nativeElement.scrollTop;
+    console.log(relOffset);
+    this.details.nativeElement.scrollTop = 
+      this.hoverIndex * this.DETAILS_HEIGHT*(1 + 1/this.data.values.length) + 9 - relOffset;
+  }
+
+  scrollBars() {
+    let relOffset = this.details.nativeElement.querySelectorAll('.detail')[this.hoverIndex].offsetTop -
+                    this.details.nativeElement.scrollTop;
+    console.log(relOffset);
+    let elementTop = this.hoverIndex * this.BAR_HEIGHT;
+    if ((this.bars.nativeElement.scrollTop + 50> elementTop) || 
+        (this.bars.nativeElement.scrollTop + 450 < elementTop)) {
+      this.bars.nativeElement.scrollTop = elementTop  - relOffset - (this.DETAILS_HEIGHT - this.BAR_HEIGHT)/2;
+    }
   }
 
   ngOnInit() {
@@ -182,10 +196,11 @@ export class AdamKeyChartComponent {
       }
     }
     this.maxValue *= 1.15;
-    this.maxHeight = this.data.values.length * 9;
-    if (this.maxHeight < 200) {
-      this.maxHeight = 200;
-    }
+    // this.maxHeight = this.data.values.length * 9;
+    // if (this.maxHeight < 200) {
+    //   this.maxHeight = 200;
+    // }
+    this.maxHeight = 500;
     if (this.data.selected) {
       this.hoverIndex = this.data.selected;
       window.setTimeout(() => this.scrollDetails(), 0);

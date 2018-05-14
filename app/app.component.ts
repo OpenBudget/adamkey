@@ -16,7 +16,12 @@ let country_gdp = require('./adamke.json')
 export class AppComponent {
 
   private data: any = {
-    values: country_gdp
+    values: country_gdp,
+    selected: (() => {
+      for (let i = 0 ; i < country_gdp.length ; i++) {
+        if (country_gdp[i].label === 'Israel') return i;
+      }
+    })()
   };
 
   constructor() {

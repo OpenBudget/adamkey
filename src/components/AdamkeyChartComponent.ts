@@ -77,6 +77,14 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         padding: 10px 20px;
       }
 
+      @media only screen and (max-width: 600px) {
+        .details {
+          box-shadow: none;
+          border: none;
+          padding: 0;
+        }
+      }
+
       .detail {
         height: 50px;
         display: flex;
@@ -123,6 +131,12 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         padding-right: 0;
         overflow-y: scroll;
       }   
+
+      @media only screen and (max-width: 600px) {
+        .barchart {
+          display: none;
+        }
+      }
 
       .bar {
         position: absolute;

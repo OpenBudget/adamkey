@@ -1,6 +1,6 @@
 {
   "name": "adamkey",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A component for displaying a horizontal bar graph of many items in one series",
   "main": "lib/index.js",
   "module": "lib/index.js",

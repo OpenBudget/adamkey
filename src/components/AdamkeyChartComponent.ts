@@ -3,29 +3,29 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 @Component({
   selector: 'budgetkey-chart-adamkey',
   template: `
-    <div class='row chart'>
-      <div class='details-container col-md-6'>
+    <div class='chart'>
+      <div class='details-container'>
         <div class="details" #details
              [style.height]="maxHeight + 'px'"
         >
-          <div class='row detail' 
+          <div class='detail' 
               *ngFor='let value of data.values; let i = index'
               [ngClass]="{hovered: i == hoverIndex && hoverIndex != data.selected, selected: i == data.selected}"
               (mouseover)="hoverIndex = i; scrollBars()"
           >
-            <div class='index-col col-xs-1'>
+            <div class='index-col'>
               <div class='text'>{{ i + 1 }}</div>
             </div>
-            <div class='label-col col-xs-7'>
+            <div class='label-col'>
               <div class='text' [innerHtml]="value.label"></div>
             </div>
-            <div class='amount-col col-xs-4'>
+            <div class='amount-col'>
               <div class='text'>{{ value.amount_fmt }}</div>
             </div>
           </div>
         </div>
       </div>
-      <div class='barchart col-md-6' #bars
+      <div class='barchart' #bars
         [style.height]="maxHeight + 'px'"
         >
         <ng-container  *ngFor="let v of data.values; let i = index">
@@ -49,11 +49,13 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
     `
       .chart {
         margin-top: 20px;
+        display: flex;
+        flex-flow: row;
       }
 
       .text {
         vertical-align: middle;
-        height: 0px;
+        // height: 0px;
         display: inline-block;    
       }
 
@@ -63,6 +65,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
       .details, .barchart {
         scroll-behavior: smooth;
+        flex: 1;
       }
 
       .details {
@@ -76,6 +79,10 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
       .detail {
         height: 50px;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        vertical-align: middle;
       }
 
       .detail.hovered {
@@ -88,10 +95,14 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         font-family: "Abraham TRIAL";	
         font-size: 18px;	
         text-align: right;
+        padding-right: 15px;
+        width: 40px;
       }
 
       .amount-col {
-        text-align: left;
+        margin-right: auto;
+        margin-left: 0;
+        // text-align: left;
         color: #3E4E59;	
         font-family: "Miriam Libre";	
         font-size: 14px;

@@ -1,5 +1,8 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
+const BAR_HEIGHT = 9;
+const DETAILS_HEIGHT = 75;
+
 @Component({
   selector: 'budgetkey-chart-adamkey',
   template: `
@@ -55,7 +58,6 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
       .text {
         vertical-align: middle;
-        // height: 0px;
         display: inline-block;    
       }
 
@@ -86,7 +88,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
       }
 
       .detail {
-        height: 50px;
+        height: ` + DETAILS_HEIGHT + `px;
         display: flex;
         flex-flow: row;
         align-items: center;
@@ -104,17 +106,28 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
         font-size: 18px;	
         text-align: right;
         padding-right: 15px;
-        width: 40px;
+        padding-left: 5px;
+        min-width: 40px;
+        flex: 0 0 auto;
       }
 
+      .label-col {
+        flex: 1 1 auto;
+      }
+      
       .amount-col {
+        flex: 0 0 auto;
         margin-right: auto;
         margin-left: 0;
-        // text-align: left;
         color: #3E4E59;	
         font-family: "Miriam Libre";	
         font-size: 14px;
         font-weight: 400;
+        padding: 0 10px;
+      }
+
+      .amount-col .text {
+        white-space: nowrap;
       }
 
       .detail.selected {
@@ -140,7 +153,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
       .bar {
         position: absolute;
-        height: 8px;
+        height: ` + (BAR_HEIGHT-1) + `px;
         background-color: #E9E6F1;
       }
 
@@ -180,9 +193,6 @@ export class AdamKeyChartComponent {
   maxHeight: number = 1;
   hoverIndex_: number = 0;
 
-  BAR_HEIGHT = 9;
-  DETAILS_HEIGHT = 50;
-
   constructor() {
   }
 
@@ -200,17 +210,17 @@ export class AdamKeyChartComponent {
                     this.bars.nativeElement.scrollTop;
     console.log(relOffset);
     this.details.nativeElement.scrollTop = 
-      this.hoverIndex * this.DETAILS_HEIGHT*(1 + 1/this.data.values.length) + 9 - relOffset;
+      this.hoverIndex * DETAILS_HEIGHT*(1 + 1/this.data.values.length) + 9 - relOffset;
   }
 
   scrollBars() {
     let relOffset = this.details.nativeElement.querySelectorAll('.detail')[this.hoverIndex].offsetTop -
                     this.details.nativeElement.scrollTop;
     console.log(relOffset);
-    let elementTop = this.hoverIndex * this.BAR_HEIGHT;
+    let elementTop = this.hoverIndex * BAR_HEIGHT;
     if ((this.bars.nativeElement.scrollTop + 50> elementTop) || 
         (this.bars.nativeElement.scrollTop + 450 < elementTop)) {
-      this.bars.nativeElement.scrollTop = elementTop  - relOffset - (this.DETAILS_HEIGHT - this.BAR_HEIGHT)/2;
+      this.bars.nativeElement.scrollTop = elementTop  - relOffset - (DETAILS_HEIGHT - BAR_HEIGHT)/2;
     }
   }
 
@@ -221,10 +231,6 @@ export class AdamKeyChartComponent {
       }
     }
     this.maxValue *= 1.15;
-    // this.maxHeight = this.data.values.length * 9;
-    // if (this.maxHeight < 200) {
-    //   this.maxHeight = 200;
-    // }
     this.maxHeight = 500;
     if (this.data.selected) {
       this.hoverIndex = this.data.selected;

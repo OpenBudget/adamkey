@@ -1,11 +1,11 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AdamkeyModule } from '../src';
 
 import { AppComponent } from './app.component';
-import {AdamKeyChartComponent} from "../src/components/AdamkeyChartComponent";
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+
+import { AdamkeyModule, AdamKeyChartComponent } from 'adamkey';
 
 declare const process: any;
 

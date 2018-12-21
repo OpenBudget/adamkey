@@ -13,7 +13,8 @@ const DETAILS_HEIGHT = 75;
         >
           <div class='detail' 
               *ngFor='let value of data.values; let i = index'
-              [ngClass]="{hovered: i == hoverIndex && hoverIndex != data.selected, selected: i == data.selected}"
+              [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+              [class.selected]="i == data.selected"
               (mouseover)="hoverIndex = i; scrollBars()"
           >
             <div class='index-col'>
@@ -33,13 +34,15 @@ const DETAILS_HEIGHT = 75;
         >
         <ng-container  *ngFor="let v of data.values; let i = index">
           <div class="bar-bg"
-              [ngClass]="{hovered: i == hoverIndex && hoverIndex != data.selected, selected: i == data.selected}"
+              [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+              [class.selected]="i == data.selected"
               [style.top]="(9 * i) + 'px'"
               (mouseover)="hoverIndex = i; scrollDetails()"
               >
           </div>
           <div class="bar"
-              [ngClass]="{hovered: i == hoverIndex && hoverIndex != data.selected, selected: i == data.selected}"
+              [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+              [class.selected]="i == data.selected"
               [style.width]="100 * (v.amount / maxValue) + '%'"
               [style.top]="(9 * i) + 'px'"
               (mouseover)="hoverIndex = i; scrollDetails()"

@@ -200,7 +200,7 @@ export class AdamKeyChartComponent {
   }
 
   public set hoverIndex( v: number) {
-    console.log('hoverIndex', v);
+    // console.log('hoverIndex', v);
     this.hoverIndex_ = v;
   }
 
@@ -211,7 +211,7 @@ export class AdamKeyChartComponent {
   scrollDetails() {
     let relOffset = this.bars.nativeElement.querySelectorAll('.bar')[this.hoverIndex].offsetTop -
                     this.bars.nativeElement.scrollTop;
-    console.log(relOffset);
+    // console.log(relOffset);
     this.details.nativeElement.scrollTop = 
       this.hoverIndex * DETAILS_HEIGHT*(1 + 1/this.data.values.length) + 9 - relOffset;
   }
@@ -219,7 +219,7 @@ export class AdamKeyChartComponent {
   scrollBars() {
     let relOffset = this.details.nativeElement.querySelectorAll('.detail')[this.hoverIndex].offsetTop -
                     this.details.nativeElement.scrollTop;
-    console.log(relOffset);
+    // console.log(relOffset);
     let elementTop = this.hoverIndex * BAR_HEIGHT;
     if ((this.bars.nativeElement.scrollTop + 50> elementTop) || 
         (this.bars.nativeElement.scrollTop + 450 < elementTop)) {

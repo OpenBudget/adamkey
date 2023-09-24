@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { AdamKeyChartComponent } from './adamkey.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AdamKeyChartComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
   ],
   exports: [AdamKeyChartComponent]
 })

@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
-import { AdamkeyModule, AdamKeyChartComponent } from 'adamkey';
+import { AdamkeyModule } from 'adamkey';
 import { HttpClientModule } from '@angular/common/http';
 
 declare const process: any;

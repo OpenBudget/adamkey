@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
 import { AdamkeyModule, AdamKeyChartComponent } from 'adamkey';
+import { HttpClientModule } from '@angular/common/http';
 
 declare const process: any;
 
@@ -13,7 +14,8 @@ declare const process: any;
   imports: [
     BrowserModule,
     FormsModule,
-    AdamkeyModule
+    HttpClientModule,
+    AdamkeyModule,
   ],
   declarations: [
     AppComponent

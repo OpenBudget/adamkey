@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [AdamKeyChartComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   exports: [AdamKeyChartComponent]
 })

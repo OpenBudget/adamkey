@@ -1,0 +1,41 @@
+<div class='chart'>
+    <div class='details-container'>
+        <div class="details" #details
+        [style.height]="maxHeight + 'px'"
+        >
+        <div class='detail' 
+        *ngFor='let value of data.values; let i = index'
+        [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+        [class.selected]="i == data.selected"
+        (mouseover)="hoverIndex = i; scrollBars()"
+        >
+        <div class='index-col'>
+            <div class='text'>{{ i + 1 }}</div>
+        </div>
+        <div class='label-col'>
+            <div class='text' [innerHtml]="value.label"></div>
+        </div>
+        <div class='amount-col'>
+            <div class='text'>{{ value.amount_fmt }}</div>
+        </div>
+    </div>
+</div>
+</div>
+<div class='barchart' #bars [style.height]="maxHeight + 'px'">
+    <ng-container  *ngFor="let v of data.values; let i = index">
+        <div class="bar-bg"
+            [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+            [class.selected]="i == data.selected"
+            [style.top]="(9 * i) + 'px'"
+            (mouseover)="hoverIndex = i; scrollDetails()"
+            >
+        </div>
+        <div class="bar"
+            [class.hovered]="i == hoverIndex && hoverIndex != data.selected"
+            [class.selected]="i == data.selected"
+            [style.width]="100 * (v.amount / maxValue) + '%'"
+            [style.top]="(9 * i) + 'px'"
+            (mouseover)="hoverIndex = i; scrollDetails()">
+        </div>
+    </ng-container>
+</div>

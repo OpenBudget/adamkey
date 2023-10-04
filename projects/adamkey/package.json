@@ -1,7 +1,7 @@
 {
   "name": "adamkey",
   "description": "A component for displaying a horizontal bar graph of many items in one series",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OpenBudget/adamkey.git"

@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { timer } from 'rxjs';
 
 const BAR_HEIGHT = 9;
 const DETAILS_HEIGHT = 75;
@@ -59,7 +60,7 @@ export class AdamKeyChartComponent {
     this.maxHeight = 500;
     if (this.data.selected) {
       this.hoverIndex = this.data.selected;
-      window.setTimeout(() => this.scrollDetails(), 0);
+      timer(0).subscribe(() => this.scrollDetails());
     }
   }
 

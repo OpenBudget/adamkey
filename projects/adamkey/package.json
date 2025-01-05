@@ -1,12 +1,12 @@
 {
   "name": "adamkey",
   "description": "A component for displaying a horizontal bar graph of many items in one series",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OpenBudget/adamkey.git"
   },
-  "keywords": [
+  "keywords": [ 
     "BarChart",
     "Angular",
     "OpenBudget"
@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/OpenBudget/adamkey#readme",
   "peerDependencies": {
-    "@angular/common": "^17",
-    "@angular/core": "^17"
+    "@angular/common": "^18",
+    "@angular/core": "^18"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }
